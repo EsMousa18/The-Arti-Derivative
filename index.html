@@ -36,7 +36,7 @@
         }
     </script>
     <style>
-        /* Base styles for the Inter font and smooth transitions */
+        /* BASE CSS STYLES */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f0f4f8; /* Very light background for contrast */
@@ -102,7 +102,7 @@
 
         <!-- Tab Navigation -->
         <div class="flex flex-wrap border-b border-arti-dark mb-6 bg-white rounded-t-xl shadow-lg">
-            <!-- Updated inactive tabs to use vibrant pink text -->
+            <!-- Inactive tabs use vibrant pink text -->
             <button data-tab="mission" class="tab-button active flex-1 text-sm sm:text-base font-semibold py-3 px-2 sm:px-4 text-arti-pink focus:outline-none rounded-t-lg">
                 Mission & Vision
             </button>
@@ -231,6 +231,7 @@
     </footer>
 
     <script>
+        // JAVASCRIPT LOGIC
         document.addEventListener('DOMContentLoaded', () => {
             const tabs = document.querySelectorAll('.tab-button');
             const contentArea = document.getElementById('content-area');
