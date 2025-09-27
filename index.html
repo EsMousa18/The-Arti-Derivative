@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Arti-Derivative - Merging Art & Math</title>
+    <title>The Arti-Derivative</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Fredoka font for the fun heading and Inter for body text -->
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&display=swap" rel="stylesheet">
+    <!-- Load Fredoka (for headings) and Inter (for body) fonts -->
+    <!-- Added Inter font for body text use -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <!-- Configure Tailwind to use custom colors and the new font -->
     <script>
         tailwind.config = {
@@ -17,19 +18,23 @@
                         'arti-dark': '#51207c', /* Dark Purple */
                         'arti-pink': '#fc48b6', /* Vibrant Pink */
                         'arti-green': '#10ce6c', /* Bright Green */
+                        'arti-light': '#f0eef5', /* Off-White for contrast */
+                        'arti-new-bg': '#ffd2ff', /* New light background color */
                     },
                     fontFamily: {
+                        // Using 'Inter' as the default sans-serif for body
                         sans: ['Inter', 'sans-serif'],
+                        // 'Fredoka' for the fun heading
                         funny: ['Fredoka', 'sans-serif'],
                     },
                     keyframes: {
                         'pop-in': {
-                            '0%': { transform: 'scale(0.8)', opacity: '0' },
+                            '0%': { transform: 'scale(0.9)', opacity: '0' },
                             '100%': { transform: 'scale(1)', opacity: '1' },
                         }
                     },
                     animation: {
-                        'pop-in': 'pop-in 0.6s ease-out',
+                        'pop-in': 'pop-in 0.35s ease-out',
                     }
                 }
             }
@@ -38,19 +43,26 @@
     <style>
         /* BASE CSS STYLES */
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8; /* Very light background for contrast */
+            /* EDITED: Set the overall body background to the requested light pink color */
+            background-color: #ffd2ff; 
         }
         .tab-button {
             transition: all 0.3s ease;
+            cursor: pointer; /* Ensure pointer is shown on hover */
         }
-        /* Active tab styling: Dark background, White text, Pink underline */
+        /* Active tab styling: Green background, Dark Purple text, Pink underline */
         .tab-button.active {
-            box-shadow: 0 4px 0 0 #fc48b6; 
-            background-color: #51207c;
-            color: white;
+            box-shadow: 0 4px 0 0 #fc48b6; /* Pink underline effect */
+            background-color: #10ce6c; /* CHANGED to Bright Green (arti-green) */
+            color: #51207c; /* CHANGED to Dark Purple (arti-dark) for contrast */
             border-radius: 0.5rem 0.5rem 0 0;
+            z-index: 10; /* Ensure active tab is above the content border */
         }
+        /* Inactive tab hover state for better UX */
+        .tab-button:not(.active):hover {
+            background-color: rgba(252, 72, 182, 0.1); /* Light pink hover */
+        }
+
         /* Custom scrollbar for aesthetics */
         ::-webkit-scrollbar {
             width: 8px;
@@ -64,10 +76,10 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col font-sans">
 
-    <!-- Header Section -->
-    <header class="bg-arti-dark shadow-xl">
+    <!-- Header Section (Stays dark purple) -->
+    <header class="bg-arti-dark border-b border-arti-pink/50"> 
         <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <!-- Logo/Icon: A simple shape blending math and art using colors -->
@@ -79,16 +91,16 @@
                     The Arti-Derivative
                 </h1>
             </div>
-            <a href="#support" class="hidden sm:inline-block bg-arti-green text-arti-dark font-bold py-2 px-4 rounded-full hover:opacity-90 transition duration-300 shadow-md">
+            <a href="#support-section" class="hidden sm:inline-block bg-arti-green text-arti-dark font-bold py-2 px-4 rounded-full hover:opacity-90 transition duration-300 shadow-lg">
                 Join the Mission
             </a>
         </div>
     </header>
 
-    <!-- Intro/Hero Section: Uses the funny font and vibrant gradient for a vibey intro -->
-    <section class="bg-arti-dark py-16 sm:py-24 text-center rounded-b-3xl shadow-2xl animate-pop-in">
+    <!-- Intro/Hero Section (Animated part - STAYS dark purple as requested) -->
+    <section class="py-16 sm:py-24 text-center rounded-b-3xl shadow-2xl animate-pop-in bg-arti-dark">
         <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-6xl sm:text-7xl lg:text-8xl font-funny tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-arti-pink to-arti-green leading-none mb-4">
+            <h2 class="text-6xl sm:text-7xl lg:text-8xl font-funny tracking-tight text-arti-pink leading-none mb-4">
                 The Arti-Derivative
             </h2>
             <p class="text-xl sm:text-2xl text-white/90 font-semibold italic">
@@ -97,124 +109,128 @@
         </div>
     </section>
 
-    <!-- Main Content Container -->
-    <main class="flex-grow max-w-7xl mx-auto w-full p-4 sm:p-6 lg:p-8 -mt-12 z-10 relative"> <!-- Raised slightly to overlap the hero section -->
+    <!-- Main Content Container - Will now sit on the new light pink background -->
+    <main class="flex-grow max-w-7xl mx-auto w-full p-4 sm:p-6 lg:p-8 -mt-16 z-10 relative"> 
 
-        <!-- Tab Navigation -->
-        <div class="flex flex-wrap border-b border-arti-dark mb-6 bg-white rounded-t-xl shadow-lg">
-            <!-- Inactive tabs use vibrant pink text -->
-            <button data-tab="mission" class="tab-button active flex-1 text-sm sm:text-base font-semibold py-3 px-2 sm:px-4 text-arti-pink focus:outline-none rounded-t-lg">
+        <!-- Tab Navigation - (Inner content container) -->
+        <div role="tablist" class="flex flex-wrap border-b-2 border-arti-dark mb-0 bg-white rounded-t-xl shadow-xl relative z-20">
+            <!-- Added role="tab" and aria-controls -->
+            <button role="tab" aria-selected="true" aria-controls="mission-panel" data-tab="mission" class="tab-button active flex-1 text-sm sm:text-base font-semibold py-3 px-2 sm:px-4 text-white focus:outline-none rounded-t-lg">
                 Mission & Vision
             </button>
-            <button data-tab="concept" class="tab-button flex-1 text-sm sm:text-base font-semibold py-3 px-2 sm:px-4 text-arti-pink focus:outline-none">
+            <button role="tab" aria-selected="false" aria-controls="concept-panel" data-tab="concept" class="tab-button flex-1 text-sm sm:text-base font-semibold py-3 px-2 sm:px-4 text-arti-pink focus:outline-none">
                 The Core Concept
             </button>
-            <button data-tab="audience" class="tab-button flex-1 text-sm sm:text-base font-semibold py-3 px-2 sm:px-4 text-arti-pink focus:outline-none">
+            <button role="tab" aria-selected="false" aria-controls="audience-panel" data-tab="audience" class="tab-button flex-1 text-sm sm:text-base font-semibold py-3 px-2 sm:px-4 text-arti-pink focus:outline-none">
                 Our Community
             </button>
-            <button data-tab="roadmap" class="tab-button flex-1 text-sm sm:text-base font-semibold py-3 px-2 sm:px-4 text-arti-pink focus:outline-none">
+            <button role="tab" aria-selected="false" aria-controls="roadmap-panel" data-tab="roadmap" class="tab-button flex-1 text-sm sm:text-base font-semibold py-3 px-2 sm:px-4 text-arti-pink focus:outline-none">
                 Roadmap & Support
             </button>
         </div>
 
-        <!-- Tab Content Area -->
-        <div id="content-area" class="bg-white p-6 sm:p-8 rounded-b-xl rounded-tr-xl shadow-2xl border border-arti-pink/30">
+        <!-- Tab Content Area - (Inner content container) -->
+        <div id="content-area" class="bg-white p-6 sm:p-8 rounded-b-xl rounded-tr-xl shadow-2xl border border-arti-pink/10 relative z-10">
 
             <!-- 1. Mission & Vision (Introduction) -->
-            <div id="mission" class="tab-content">
+            <!-- Added role="tabpanel" and aria-labelledby -->
+            <div id="mission-panel" role="tabpanel" aria-labelledby="mission" class="tab-content">
                 <h2 class="text-3xl font-extrabold text-arti-dark mb-4 border-b-2 border-arti-pink pb-2">
-                    Bridging the Divide: Art Meets Math
+                    Bridging the Divide when Art Meets Math 
                 </h2>
                 <p class="text-gray-700 leading-relaxed mb-4">
                     The false dichotomy between Arts and Mathematics pervades modern education, often denying students the essential joy of creation and critical thought. We challenge the notion that these fields are incompatible. Design, composition, and proportion are inherently mathematical, guided by a subconscious geometry that influences everything from the Golden Ratio to complex sacred patterns.
                 </p>
-                <p class="text-gray-700 leading-relaxed mb-4 p-4 rounded-lg bg-arti-dark/10 border-l-4 border-arti-green font-medium">
-                    Our failure to teach this connection undermines quality, inclusive learning (SDG 4) and disproportionately affects disadvantaged children (SDG 10), limiting their potential in the growing creative economy (SDG 8). We aim to reconnect critical thinking with creative imagination.
+                <!-- Used new custom color 'arti-light' for a softer background -->
+                <p class="text-gray-700 leading-relaxed mb-4 p-4 rounded-lg bg-arti-light border-l-4 border-arti-green font-medium">
+                    Our failure to teach this connection undermines quality, inclusive learning (SDG 4) and disproportionately affects disadvantaged children who never tried to practise art before (SDG 10), limiting their potential in the growing creative economy (SDG 8). We aim to reconnect critical thinking with creative imagination.
                 </p>
             </div>
 
             <!-- 2. The Core Concept (The Basics) -->
-            <div id="concept" class="tab-content hidden">
+            <div id="concept-panel" role="tabpanel" aria-labelledby="concept" class="tab-content hidden">
                 <h2 class="text-3xl font-extrabold text-arti-dark mb-4 border-b-2 border-arti-pink pb-2">
                     Mathematical Surrealism: The Foundation of Creativity
                 </h2>
                 <div class="space-y-6">
-                    <div class="p-5 rounded-lg border border-arti-dark/20">
+                    <div class="p-5 rounded-lg border border-arti-dark/20 bg-arti-light">
                         <h3 class="text-xl font-bold text-arti-pink mb-2">Art as a Safe Sandbox for Math</h3>
                         <p class="text-gray-700">
-                            In pure math, the goal is often a single "right" answer, stifling experimentation. Art, conversely, offers a compelling sandbox where one mathematical principle (like a trigonometric function or a tessellation) can generate infinite results. A 'failure' in art simply becomes a new, interesting aesthetic outcome. This freedom fosters resilience, adaptability, and the vital "trial of different strategies."
+                            In pure math, the goal is often a single "right" answer, stifling experimentation. Art, conversely, offers a compelling sandbox where one mathematical principle (like a trigonometric function or a tessellation) can generate infinite results. A 'failure' in art simply becomes a new, interesting aesthetic outcome. This freedom provide resilience, adaptability, and the vital "trial of different strategies."
                         </p>
                     </div>
-                    <div class="p-5 rounded-lg border border-arti-dark/20">
+                    <div class="p-5 rounded-lg border border-arti-dark/20 bg-arti-light">
                         <h3 class="text-xl font-bold text-arti-pink mb-2">The Cycle of Informed Creation</h3>
                         <p class="text-gray-700">
-                            Using mathematical adjustments to solve artistic problems is crucial for better design. For instance, fixing an unbalanced composition requires adjusting a *scaling algorithm*, and correcting a jarring color palette requires applying a complementary color scheme based on the *mathematical color wheel*. This continuous loop—breaking down aesthetic issues with analytical math—deepens engagement far beyond simple equation solving.
+                            Using mathematical adjustments to solve artistic problems is crucial for better design. For instance, fixing an unbalanced composition requires adjusting a scaling algorithm, and correcting a jarring color palette requires applying a complementary color scheme based on the mathematical color wheel. This continuous loop—breaking down aesthetic issues with analytical math—deepens engagement far beyond simple equation solving.
                         </p>
                     </div>
-                    <p class="text-lg font-medium text-arti-green italic">
+                    <p class="text-lg font-medium text-arti-dark italic bg-arti-green/10 p-4 rounded-lg">
                         The goal is not linear algebra or color grading tutorials, but teaching how a simple 2D shape can create profound 3D surrealism. This is the door to "mathematical surrealism," enhancing soft skills essential for the imaginative engineers and critical-thinking doctors of tomorrow.
                     </p>
                 </div>
             </div>
 
             <!-- 3. Our Community (Target Audience) -->
-            <div id="audience" class="tab-content hidden">
+            <div id="audience-panel" role="tabpanel" aria-labelledby="audience" class="tab-content hidden">
                 <h2 class="text-3xl font-extrabold text-arti-dark mb-4 border-b-2 border-arti-pink pb-2">
-                    Empowering Underrepresented Children
+                    Empowering Underrepresented Children 
                 </h2>
                 <p class="text-gray-700 leading-relaxed mb-6">
-                    Our primary focus is on **children in underrepresented communities** who lack access to scientific content that nurtures their critical thinking and imagination. The fusion of arts and mathematics is specifically designed to support those without guidance on how to learn new skills or develop their natural talents.
+                    Our primary focus is on children in underrepresented communities who lack access to scientific content that nurtures their critical thinking and imagination. The fusion of arts and mathematics is specifically designed to support those without guidance on how to learn new skills or develop their natural talents.
                 </p>
-                <div class="bg-arti-pink/10 p-5 rounded-lg shadow-inner">
+                <!-- Changed background for better contrast and emphasis -->
+                <div class="bg-arti-dark/10 p-5 rounded-xl shadow-inner border border-arti-pink/30">
                     <h3 class="text-xl font-bold text-arti-dark mb-3">Who We Serve:</h3>
                     <ul class="space-y-3 text-gray-700 list-none">
                         <li class="flex items-start">
-                            <span class="text-arti-pink mr-3 text-2xl">•</span>
-                            <span>**Children in Orphanages:** Providing them with the resources for self-directed learning and creative expression.</span>
+                            <span class="text-arti-pink mr-3 text-2xl font-extrabold">•</span>
+                            <span>Children in Orphanages: Providing them with the resources for self-directed learning and creative expression.</span>
                         </li>
                         <li class="flex items-start">
-                            <span class="text-arti-pink mr-3 text-2xl">•</span>
-                            <span>**Disabled Children:** Creating accessible content that engages diverse cognitive and creative abilities.</span>
+                            <span class="text-arti-pink mr-3 text-2xl font-extrabold">•</span>
+                            <span>Disabled Children: Creating accessible content that engages diverse cognitive and creative abilities.</span>
                         </li>
                         <li class="flex items-start">
-                            <span class="text-arti-pink mr-3 text-2xl">•</span>
-                            <span>**Free Schools:** Raising funds for schools that lack the necessary equipment and educational resources to teach these critical soft skills.</span>
+                            <span class="text-arti-pink mr-3 text-2xl font-extrabold">•</span>
+                            <span>Free Schools: Raising funds for schools that lack the necessary equipment and educational resources to teach these critical soft skills.</span>
                         </li>
                     </ul>
                 </div>
             </div>
 
             <!-- 4. Roadmap & Support (Solution Requirement/Objectives) -->
-            <div id="roadmap" class="tab-content hidden">
+            <div id="roadmap-panel" role="tabpanel" aria-labelledby="roadmap" class="tab-content hidden">
                 <h2 class="text-3xl font-extrabold text-arti-dark mb-4 border-b-2 border-arti-pink pb-2">
-                    Our Solution: The Arti-Derivative
+                    Our Solution: The Arti-Derivative Curriculum 
                 </h2>
                 <p class="text-gray-700 leading-relaxed mb-6">
-                    Our central solution is the development of a curriculum centered around a kids' book titled **The Arti-Derivative**, which vividly presents the profound relationship between mathematics and the arts to children. Beyond the book, we focus on establishing a supportive environment by providing equipment to enhance critical thinking and imagination, fostering future leaders.
+                    Our central solution is the development of a curriculum centered around a kids' book titled "The Arti-Derivative", which vividly presents the profound relationship between mathematics and the arts to children. Beyond the book, we focus on establishing a supportive environment by providing equipment to enhance critical thinking and imagination, creating future leaders.
                 </p>
 
-                <h3 class="text-2xl font-bold text-arti-dark mb-4 mt-6">Key Objectives:</h3>
-                <ol class="space-y-4 text-gray-700 list-decimal ml-5">
-                    <li class="pl-2">
-                        <strong class="text-arti-green">Curriculum Creation:</strong> Finalizing a comprehensive curriculum to accompany *The Arti-Derivative* book.
+                <h3 class="text-2xl font-bold text-arti-dark mb-4 mt-6 border-b border-gray-200 pb-2">Key Objectives:</h3>
+                <!-- Used a slightly different list style for visual appeal -->
+                <ol class="space-y-4 text-gray-700 list-inside font-medium">
+                    <li class="p-2 border-l-4 border-arti-green bg-arti-light rounded-sm">
+                        <strong class="text-arti-dark">1. Curriculum Creation:</strong> Finalizing a comprehensive curriculum to accompany The Arti-Derivative book.
                     </li>
-                    <li class="pl-2">
-                        <strong class="text-arti-green">Digital Outreach:</strong> Maintaining this website to inform the public about our mission and progress.
+                    <li class="p-2 border-l-4 border-arti-green bg-arti-light rounded-sm">
+                        <strong class="text-arti-dark">2. Digital Outreach:</strong> Maintaining this website to inform the public about our mission and progress.
                     </li>
-                    <li class="pl-2">
-                        <strong class="text-arti-green">School Camps:</strong> Organizing camps to promote the mission of Arti-Derivative, encourage engagement, and actively collect funds.
+                    <li class="p-2 border-l-4 border-arti-green bg-arti-light rounded-sm">
+                        <strong class="text-arti-dark">3. School Camps:</strong> Organizing camps to promote the mission of Arti-Derivative, encourage engagement, and actively collect funds.
                     </li>
-                    <li class="pl-2">
-                        <strong class="text-arti-green">Direct Distribution Events:</strong> Hosting events specifically for disabled centers and orphanages to personally distribute the book and provide resources.
+                    <li class="p-2 border-l-4 border-arti-green bg-arti-light rounded-sm">
+                        <strong class="text-arti-dark">4. Direct Distribution Events:</strong> Hosting events specifically for disabled centers and orphanages to personally distribute the book and provide resources.
                     </li>
                 </ol>
 
-                <div class="mt-8 p-6 bg-arti-green/20 rounded-xl text-center">
+                <div id="support-section" class="mt-8 p-6 bg-arti-green/20 rounded-xl text-center border-2 border-arti-green/50">
                     <p class="text-xl font-semibold text-arti-dark mb-4">
                         We are building the bridge between logic and creativity.
                     </p>
-                    <button id="support" class="bg-arti-pink text-white font-bold text-lg py-3 px-8 rounded-full shadow-lg hover:shadow-xl hover:bg-opacity-90 transition duration-300 transform hover:scale-105">
-                        Support Our Initiative
+                    <button class="bg-arti-pink text-white font-bold text-lg py-3 px-8 rounded-full shadow-xl hover:shadow-2xl hover:bg-opacity-90 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-arti-pink/50">
+                        Support Our Initiative Today!
                     </button>
                 </div>
 
@@ -224,10 +240,10 @@
 
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-arti-dark text-white mt-8 py-4 px-4 text-center">
+    <!-- Footer (Stays dark purple) -->
+    <footer class="bg-arti-dark text-white mt-12 py-6 px-4 text-center border-t border-arti-pink/50">
         <p class="text-sm">&copy; 2024 The Arti-Derivative. Merging imagination and critical thought.</p>
-        <p class="text-xs mt-1 text-arti-green">An SDG-focused initiative for inclusive, quality education.</p>
+        <p class="text-xs mt-1 text-arti-green font-semibold">An SDG-focused initiative for inclusive, quality education.</p>
     </footer>
 
     <script>
@@ -238,32 +254,42 @@
 
             /**
              * Handles the tab switching logic.
-             * @param {string} targetTabId - The ID of the content section to show.
+             * @param {string} targetTabId - The ID of the content section to show (e.g., 'mission').
              */
             function switchTab(targetTabId) {
+                // Determine the corresponding panel ID
+                const targetPanelId = `${targetTabId}-panel`;
+
                 // 1. Deactivate all tab buttons and hide all content sections
                 tabs.forEach(button => {
-                    button.classList.remove('active');
-                    // Ensure inactive buttons are the pink color
+                    const buttonId = button.getAttribute('data-tab');
+                    const panelId = `${buttonId}-panel`;
+                    const content = document.getElementById(panelId);
+
+                    // Deactivate button style and accessibility attributes
+                    button.classList.remove('active', 'text-white');
                     button.classList.add('text-arti-pink');
-                    button.classList.remove('text-white');
-                });
-                document.querySelectorAll('.tab-content').forEach(content => {
-                    content.classList.add('hidden');
+                    button.setAttribute('aria-selected', 'false');
+
+                    // Hide content
+                    if (content) {
+                        content.classList.add('hidden');
+                    }
                 });
 
-                // 2. Activate the selected button
+                // 2. Activate the selected button and content
                 const activeTabButton = document.querySelector(`.tab-button[data-tab="${targetTabId}"]`);
+                const activeContent = document.getElementById(targetPanelId);
+                
                 if (activeTabButton) {
-                    activeTabButton.classList.add('active');
-                    // Ensure active button is white text
+                    // Activate button style and accessibility attributes
+                    activeTabButton.classList.add('active', 'text-white');
                     activeTabButton.classList.remove('text-arti-pink');
-                    activeTabButton.classList.add('text-white');
+                    activeTabButton.setAttribute('aria-selected', 'true');
                 }
 
-                // 3. Show the target content section
-                const activeContent = document.getElementById(targetTabId);
                 if (activeContent) {
+                    // Show content
                     activeContent.classList.remove('hidden');
                 }
             }
